@@ -2,31 +2,53 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Routes, RouterModule } from '@angular/router';
 import 'hammerjs';
-import { MatToolbarModule } from '@angular/material/toolbar';
-//Services
 
+//Material imports
+import { AppMaterialModule } from './app.material.module';
 
 //Components
-import { AppRoutingModule } from './app-routing.module';
+import { routing } from './app.routing';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
+import { UserLoginComponent } from './components/user/user-login/user-login.component';
+import { from } from 'rxjs';
+
+//Services
+import { LoginService } from './services/login.service';
+import { UserService } from './services/user.service';
+import { ProductService } from './services/product.service';
+import { PaymentService } from './services/payment.service';
+import { ShippingService } from './services/shipping.service';
+import { CategoryService } from './services/category.service';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    MatToolbarModule
+    UserLoginComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     NoopAnimationsModule,
-    MatToolbarModule,
-    AppRoutingModule
+    routing,
+    AppMaterialModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    LoginService,
+    UserService,
+    ProductService,
+    CategoryService,
+    PaymentService,
+    ShippingService
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

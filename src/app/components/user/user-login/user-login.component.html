@@ -1,0 +1,22 @@
+<div class="container col-s12-m12-l12">
+  <h3 class="ui header"> Login From</h3>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)" 
+  class="login-form" [class.error]="!loginForm.valid && loginForm.touched">
+<div class="login-container">
+
+  <mat-form-field class="login-full-width">
+    <label for="username">Username:</label>
+    <input matInput type="text"
+    id="username"
+    [formControl]="loginForm.controls['username']">
+  </mat-form-field>
+<mat-form-field class="login-full-width">
+    <label for="password">Password:</label>
+    <input matInput type="password"
+    id="password"
+    [formControl]="loginForm.controls['password']">
+  </mat-form-field>
+  <button mat-button type="submit" class="ui button">Submit</button>
+</div>
+  </form>
+</div>
