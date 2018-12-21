@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Product } from '../model/product.model';
 import { AppConst } from '../constants/app-const';
 import { Observable } from 'rxjs';
@@ -8,15 +8,15 @@ import { Observable } from 'rxjs';
 export class ProductService {
 
     private serverPath = AppConst.servPath;
-
     private httpOptions = {
-        headers: new Headers({
+
+        headers: new HttpHeaders({
             'Content-Type': 'application/json',
             'x-auth-token': localStorage.getItem('xAuthToken')
         })
     };
 
-    constructor(private http: Http) { }
+    constructor(private http: HttpClient) { }
 
     getProductList(): any {
         const allProductsUrl = this.serverPath + '/product/all';

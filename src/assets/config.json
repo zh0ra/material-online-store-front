@@ -1,0 +1,4 @@
+{
+"storeServerUrl" : "http://localhost:8181",
+"textfile":"/assets/textfile.txt"
+}
