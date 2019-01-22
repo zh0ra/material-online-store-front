@@ -1,18 +1,18 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span>Third Line</span>
+    <span>OnlineStore</span>
     <span class="example-spacer"></span>
-    <mat-icon class="example-icon">favorite</mat-icon>
+    <mat-icon class="example-icon">menu</mat-icon>
 
 <button mat-button [matMenuTriggerFor]="mainMenu">Menu</button>
-<button mat-button [matMenuTriggerFor]="mainMenu">Login</button>
+<button mat-button [routerLink]="['/login']" routerLinkActive="router-link-active" >Login</button>
     
 <mat-menu #mainMenu="matMenu">
-      <button mat-menu-item [matMenuTriggerFor]="vertebrates">Vertebrates</button>
-      <button mat-menu-item [matMenuTriggerFor]="invertebrates">Invertebrates</button>
+      <button mat-menu-item [matMenuTriggerFor]="admin">Admin</button>
+      <button mat-menu-item [matMenuTriggerFor]="ecomerc">E-Comerc</button>
     </mat-menu>
     
-    <mat-menu #vertebrates="matMenu">
+    <mat-menu #admin="matMenu">
       <!-- <button mat-menu-item [matMenuTriggerFor]="fish">Fishes</button>
       <button mat-menu-item [matMenuTriggerFor]="amphibians">Amphibians</button>
       <button mat-menu-item [matMenuTriggerFor]="reptiles">Reptiles</button> -->
@@ -20,14 +20,10 @@
       <button mat-menu-item>Mammals</button>
     </mat-menu>
 
-    <mat-menu #invertebrates="matMenu">
+    <mat-menu #ecomerc="matMenu">
       <button mat-menu-item>Insects</button>
       <button mat-menu-item>Molluscs</button>
-      <button mat-menu-item>Crustaceans</button>
-      <button mat-menu-item>Corals</button>
-      <button mat-menu-item>Arachnids</button>
-      <button mat-menu-item>Velvet worms</button>
-      <button mat-menu-item>Horseshoe crabs</button>
+
     </mat-menu>
   </mat-toolbar-row>
 </mat-toolbar>
