@@ -1,5 +1,4 @@
 import { UserBilling } from './user-billing';
-
 export class UserPayment {
 
   public id?: number;

@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class ProductService {
 
-    private serverPath = AppConst.servPath;
+    private servUrl = AppConst.servUrl;
+
     private httpOptions = {
 
         headers: new HttpHeaders({
@@ -18,18 +19,18 @@ export class ProductService {
 
     constructor(private http: HttpClient) { }
 
-    getProductList(): any {
-        const allProductsUrl = this.serverPath + '/product/all';
-        return this.http.get(allProductsUrl, this.httpOptions);
+    getProductList(): Observable<Product[]> {
+        const url = `${this.servUrl}/api/product/all`;
+        return this.http.get<Product[]>(url, this.httpOptions);
     }
 
-    getProduct(id: number): any {
-        const getProductUrl = this.serverPath + '/product/' + id;
-        return this.http.get(getProductUrl, this.httpOptions);
+    getProduct(id: number): Observable<Product> {
+        const url = `${this.servUrl}/api/product/all/${id}`;
+        return this.http.get<Product>(url, this.httpOptions);
     }
 
-    searchProduct(keyword: string): any {
-        const searchProductUrl = this.serverPath + '/product/searchProudct';
-        return this.http.post(searchProductUrl, keyword, this.httpOptions);
+    searchProduct(keyword: string): Observable<Product> {
+        const url = `${this.servUrl}/api/product/all/${keyword}`;
+        return this.http.post<Product>(url, keyword, this.httpOptions);
     }
 }

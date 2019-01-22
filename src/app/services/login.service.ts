@@ -1,40 +1,44 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppConst } from '../constants/app-const';
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-private severPath = AppConst.servPath;
+  private servUrl = AppConst.servUrl;
 
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'x-auth-token': localStorage.getItem('xAuthToken')
+    })
+  };
 
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) { }
 
   sendCredentials(username: string, password: string) {
-    const url = this.severPath + '/login/token';
-    const encodedCredential = btoa(username + ':' + password);
+    const url = `${this.servUrl}/api/login/token`;
+
+    const encodedCredential = btoa(`${username}:${password}`);
     const basicHeader = 'Basic ' + encodedCredential;
-    const headers = new Headers({
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization' : basicHeader
-    });
-    return this.http.get(url, { headers: headers });
+
+    const headersOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': basicHeader
+      })
+    };
+    return this.http.get(url, headersOptions);
   }
 
   checkSession(): any {
-    const checkSessionUrl = this.severPath + '/login/checkSession';
-    const headers = new Headers({
-      'x-auth-token' : localStorage.getItem('xAuthToken')
-    });
-    return this.http.get(checkSessionUrl, {headers : headers});
+    const url = `${this.servUrl}/api/login/checkSession`;
+    return this.http.get(url, this.httpOptions);
   }
 
   logout() {
-    const url = this.severPath + '/login/user/logout';
-    const headers = new Headers({
-      'x-auth-token' : localStorage.getItem('xAuthToken')
-    });
-    return this.http.post(url, '', {headers : headers});
+    const url = `${this.servUrl}/api/login/user/logout`;
+    return this.http.post(url, '', this.httpOptions);
   }
 }

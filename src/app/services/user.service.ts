@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppConst } from '../constants/app-const';
 import { User } from '../model/user.model';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 
 export class UserService {
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
-  private serverPath = AppConst.servPath;
+  private servUrl = AppConst.servUrl;
   private httpOptions = {
-    headers: new Headers({
+    headers: new HttpHeaders({
       'Content-Type': 'application/json',
       'x-auth-token': localStorage.getItem('xAuthToken')
     })
@@ -22,9 +23,8 @@ export class UserService {
   }
 
   newUser(username: string, email: string, password: string, firstName: string, lastName: string
-  ): any {
-    const newUserUrl = this.serverPath + '/user/newUser';
-
+  ): Observable<User> {
+    const url = `${this.servUrl}/api/user/newUser`;
     const userInfo = {
       'username': username,
       'email': email,
@@ -32,24 +32,24 @@ export class UserService {
       'lastName': lastName,
       'password': password
     };
-    return this.http.post(newUserUrl, JSON.stringify(userInfo), this.httpOptions);
+    return this.http.post<User>(url, JSON.stringify(userInfo), this.httpOptions);
   }
 
-  getCurrentUser(): any {
-    const currentUserUrl = this.serverPath + '/user/getCurrentUser';
-    return this.http.get(currentUserUrl, this.httpOptions);
+  getCurrentUser(): Observable<User> {
+    const url = `${this.servUrl}/api/user/getCurrentUser`;
+    return this.http.get<User>(url, this.httpOptions);
   }
 
   retrivePassword(email: string): any {
-    const newUserUrl = this.serverPath + '/user/resetPassword';
+    const url = `${this.servUrl}api/user/resetPassoword`;
     const userInfo = {
       'email': email
     };
-    return this.http.post(newUserUrl, JSON.stringify(userInfo), this.httpOptions);
+    return this.http.post(url, JSON.stringify(userInfo), this.httpOptions);
   }
 
-  updateUserInfo(user: User, password: string) {
-    const updateUserUrl = this.serverPath + '/user/updateUserInfo';
+  updateUserInfo(user: User, password: string): Observable<User> {
+    const url = `${this.servUrl}/apo/user/updateUserInfo`;
     const updateUserInfo = {
       'firstName': user.firstName,
       'lastName': user.lastName,
@@ -57,6 +57,6 @@ export class UserService {
       'username': user.username,
       'email': user.email
     };
-    return this.http.post(updateUserUrl, JSON.stringify(updateUserInfo), this.httpOptions);
+    return this.http.post<User>(url, JSON.stringify(updateUserInfo), this.httpOptions);
   }
 }

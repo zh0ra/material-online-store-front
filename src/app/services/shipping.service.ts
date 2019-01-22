@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { AppConst } from '../constants/app-const';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserShipping } from '../model/user-shipping.model';
+import { Observable } from 'rxjs';
 
 
 @Injectable()
 export class ShippingService {
-
 
     private httpOptions = {
         headers: new HttpHeaders({
@@ -15,27 +15,27 @@ export class ShippingService {
         })
     };
 
-    private serverPath: string = AppConst.servPath;
-    private newShippingUrl = this.serverPath + '/shipping/add';
-    private getUserShippingListUrl = this.serverPath + '/shipping/getUserShippingList';
-    private removeUrl = this.serverPath + '/shipping/remove/';
-    private setDefaultUrl = this.serverPath + '/shipping/setDefault';
+    private servUrl: string = AppConst.servUrl;
 
     constructor(private http: HttpClient) { }
 
-    newShipping(shipping: UserShipping): any {
-        return this.http.post(this.newShippingUrl, JSON.stringify(shipping), this.httpOptions);
+    newShipping(shipping: UserShipping): Observable<UserShipping> {
+        const url = `${this.servUrl}/api/shipping/add`;
+        return this.http.post<UserShipping>(url, JSON.stringify(shipping), this.httpOptions);
     }
 
-    getUserShippingList(): any {
-        return this.http.get(this.getUserShippingListUrl, this.httpOptions);
+    getUserShippingList(): Observable<Array<UserShipping>> {
+        const url = `${this.servUrl}/api/shipping/getUserShippingList`;
+        return this.http.get<Array<UserShipping>>(url, this.httpOptions);
     }
 
-    removeShipping(id: number): any {
-        return this.http.post(this.removeUrl + id, this.httpOptions);
+    removeShipping(id: number): Observable<any> {
+        const url = `${this.servUrl}/api/shipping/remove/${id}`;
+        return this.http.post<any>(url, this.httpOptions);
     }
 
-    setDefaultShipping(id: number): any {
-        return this.http.post(this.setDefaultUrl, id, this.httpOptions);
+    setDefaultShipping(id: number): Observable<any> {
+        const url = `${this.servUrl}/api/shipping/setDefault`;
+        return this.http.post<any>(url, id, this.httpOptions);
     }
 }

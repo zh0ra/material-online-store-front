@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { MatFormFieldControl } from "@angular/material/form-field";
 import { User } from '../../../model/user.model';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -15,12 +16,18 @@ export class UserLoginComponent implements OnInit {
   private user = new User();
   private username = new FormControl('');
   private password = new FormControl('');
+  private email = new FormControl('');
+  private showRegistration = false;
 
   constructor(private fb: FormBuilder) {
     this.loginForm = this.fb.group({
       username: this.username,
-      password: this.password
+      password: this.password,
+      email: this.email
     });
+  }
+  tonggleRegistration() {
+    this.showRegistration = !this.showRegistration;
   }
 
   onSubmit(form: any): void {

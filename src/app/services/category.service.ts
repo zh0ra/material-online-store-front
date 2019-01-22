@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppConst } from '../constants/app-const';
 import { Category } from '../model/category.model';
-import { Observable, of} from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
 
-  private serverPath = AppConst.servPath;
+  private servUrl = AppConst.servUrl;
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -19,14 +19,13 @@ export class CategoryService {
 
   constructor(private http: HttpClient) { }
 
-
-  getCategoryList(): Observable<any> {
-    const allCategoryUrl = this.serverPath + '/category/all';
-    return this.http.get(allCategoryUrl, this.httpOptions);
+  getCategoryList(): Observable<Array<Category>> {
+    const url = `${this.servUrl}/api/category/all`;
+    return this.http.get<Array<Category>>(url, this.httpOptions);
   }
 
-  getCategory(id: number): Observable<any> {
-    const getCategoryUrl = this.serverPath + '/category/' + id;
-    return this.http.get<Category>(getCategoryUrl, this.httpOptions);
+  getCategory(id: number): Observable<Category> {
+    const url = `${this.servUrl}/api/category/${id}`;
+    return this.http.get<Category>(url, this.httpOptions);
   }
 }

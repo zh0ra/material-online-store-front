@@ -8,4 +8,5 @@ export class UserShipping {
     public userShippingCountry: string;
     public userShippingZipcode: string;
     public usreShippingDefault: string;
+    constructor(){}
 }
