@@ -59,4 +59,14 @@ export class UserService {
     };
     return this.http.post<User>(url, JSON.stringify(updateUserInfo), this.httpOptions);
   }
+
+  checkUsernameExists(username: string): any {
+    const url = `${this.servUrl}/api/user/checkUsername/${username}`;
+    return this.http.get(url, this.httpOptions);
+  }
+  
+  checkEmailExists(email: string): any {
+    const url = `${this.servUrl}/api/user/checkEmail/${email}`;
+    return this.http.get(url, this.httpOptions);
+  }
 }

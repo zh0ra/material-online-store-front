@@ -12,6 +12,7 @@ import { routing } from './app.routing';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { UserLoginComponent } from './components/user/user-login/user-login.component';
+
 //Services
 import { LoginService } from './services/login.service';
 import { UserService } from './services/user.service';
@@ -22,7 +23,8 @@ import { CategoryService } from './services/category.service';
 import { WelcomeComponent } from './components/store/welcome/welcome.component';
 import { ProductListComponent } from './components/store/product-list/product-list.component';
 import { WelcomeCategorySetComponent } from './components/store/welcome-category-set/welcome-category-set.component';
-
+import { UserViewComponent } from './components/user/user-view/user-view.component';
+import { UserRegistrationComponent } from './components/user/user-registration/user-registration.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { WelcomeCategorySetComponent } from './components/store/welcome-category
     UserLoginComponent,
     WelcomeComponent,
     ProductListComponent,
-    WelcomeCategorySetComponent
+    WelcomeCategorySetComponent,
+    UserViewComponent,
+    UserRegistrationComponent
   ],
   imports: [
     BrowserModule,

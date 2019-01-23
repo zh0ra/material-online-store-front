@@ -1,11 +1,12 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span>OnlineStore</span>
+<span><a href="#">OnlineStore</a></span>
     <span class="example-spacer"></span>
     <mat-icon class="example-icon">menu</mat-icon>
 
-<button mat-button [matMenuTriggerFor]="mainMenu">Menu</button>
-<button mat-button [routerLink]="['/login']" routerLinkActive="router-link-active" >Login</button>
+<a mat-button [matMenuTriggerFor]="mainMenu">Menu</a>
+<a mat-button [routerLink]="['/login']" routerLinkActive="router-link-active">
+<mat-icon class="example-icon">person</mat-icon>Login</a>
     
 <mat-menu #mainMenu="matMenu">
       <button mat-menu-item [matMenuTriggerFor]="admin">Admin</button>
@@ -27,3 +28,4 @@
     </mat-menu>
   </mat-toolbar-row>
 </mat-toolbar>
+
