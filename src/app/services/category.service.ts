@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Http, Headers } from '@angular/http';
 import { AppConst } from '../constants/app-const';
 import { Category } from '../model/category.model';
 import { Observable } from 'rxjs';
@@ -11,21 +11,21 @@ export class CategoryService {
 
   private servUrl = AppConst.servUrl;
   private httpOptions = {
-    headers: new HttpHeaders({
+    headers: new Headers({
       'Content-Type': 'application/json',
       'x-auth-token': localStorage.getItem('xAuthToken')
     })
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: Http) { }
 
-  getCategoryList(): Observable<Array<Category>> {
+  getCategoryList(): any {
     const url = `${this.servUrl}/api/category/all`;
-    return this.http.get<Array<Category>>(url, this.httpOptions);
+    return this.http.get(url, this.httpOptions);
   }
 
-  getCategory(id: number): Observable<Category> {
+  getCategory(id: number): any {
     const url = `${this.servUrl}/api/category/${id}`;
-    return this.http.get<Category>(url, this.httpOptions);
+    return this.http.get(url, this.httpOptions);
   }
 }

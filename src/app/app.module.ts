@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import 'hammerjs';
@@ -21,8 +21,6 @@ import { CategoryService } from './services/category.service';
 import { WelcomeComponent } from './components/store/welcome/welcome.component';
 import { ProductListComponent } from './components/store/product-list/product-list.component';
 import { WelcomeCategorySetComponent } from './components/store/welcome-category-set/welcome-category-set.component';
-import { SharedModule } from './components/shared/shared.module';
-import { UserModule } from './components/user/user.module';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { UserLoginComponent } from './components/user/user-login/user-login.component';
@@ -46,7 +44,7 @@ import { MessageService } from './services/message.service';
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    HttpClientModule,
+    HttpModule,
     AppMaterialModule,
     NoopAnimationsModule,
     routing,

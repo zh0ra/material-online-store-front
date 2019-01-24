@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Http, Headers } from '@angular/http';
 import { Product } from '../model/product.model';
 import { AppConst } from '../constants/app-const';
 import { Observable } from 'rxjs';
@@ -11,26 +11,26 @@ export class ProductService {
 
     private httpOptions = {
 
-        headers: new HttpHeaders({
+        headers: new Headers({
             'Content-Type': 'application/json',
             'x-auth-token': localStorage.getItem('xAuthToken')
         })
     };
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: Http) { }
 
-    getProductList(): Observable<Product[]> {
+    getProductList(): any {
         const url = `${this.servUrl}/api/product/all`;
-        return this.http.get<Product[]>(url, this.httpOptions);
+        return this.http.get(url, this.httpOptions);
     }
 
-    getProduct(id: number): Observable<Product> {
+    getProduct(id: number): any {
         const url = `${this.servUrl}/api/product/all/${id}`;
-        return this.http.get<Product>(url, this.httpOptions);
+        return this.http.get(url, this.httpOptions);
     }
 
-    searchProduct(keyword: string): Observable<Product> {
+    searchProduct(keyword: string): any {
         const url = `${this.servUrl}/api/product/all/${keyword}`;
-        return this.http.post<Product>(url, keyword, this.httpOptions);
+        return this.http.post(url, keyword, this.httpOptions);
     }
 }

@@ -77,7 +77,7 @@ export class UserLoginComponent implements OnInit {
         }
       );
   }
-
+  
   ngOnInit() {
     this.loginService.checkSession().subscribe(
       res => {
