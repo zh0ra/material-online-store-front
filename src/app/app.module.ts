@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import 'hammerjs';
@@ -10,8 +10,6 @@ import { AppMaterialModule } from './app.material.module';
 //Components
 import { routing } from './app.routing';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './components/shared/navbar/navbar.component';
-import { UserLoginComponent } from './components/user/user-login/user-login.component';
 
 //Services
 import { LoginService } from './services/login.service';
@@ -23,28 +21,35 @@ import { CategoryService } from './services/category.service';
 import { WelcomeComponent } from './components/store/welcome/welcome.component';
 import { ProductListComponent } from './components/store/product-list/product-list.component';
 import { WelcomeCategorySetComponent } from './components/store/welcome-category-set/welcome-category-set.component';
-import { UserViewComponent } from './components/user/user-view/user-view.component';
+import { SharedModule } from './components/shared/shared.module';
+import { UserModule } from './components/user/user.module';
+import { NavbarComponent } from './components/shared/navbar/navbar.component';
+import { FooterComponent } from './components/shared/footer/footer.component';
+import { UserLoginComponent } from './components/user/user-login/user-login.component';
 import { UserRegistrationComponent } from './components/user/user-registration/user-registration.component';
+import { UserViewComponent } from './components/user/user-view/user-view.component';
+import { MessageService } from './services/message.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
-    UserLoginComponent,
     WelcomeComponent,
     ProductListComponent,
     WelcomeCategorySetComponent,
-    UserViewComponent,
-    UserRegistrationComponent
+    NavbarComponent,
+    FooterComponent,
+    UserLoginComponent,
+    UserRegistrationComponent,
+    UserViewComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    HttpModule,
+    HttpClientModule,
+    AppMaterialModule,
     NoopAnimationsModule,
     routing,
-    AppMaterialModule,
     ReactiveFormsModule
   ],
   providers: [
@@ -53,8 +58,8 @@ import { UserRegistrationComponent } from './components/user/user-registration/u
     ProductService,
     CategoryService,
     PaymentService,
-    ShippingService
-
+    ShippingService,
+    MessageService
   ],
   bootstrap: [AppComponent]
 })
